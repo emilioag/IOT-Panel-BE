@@ -7,8 +7,11 @@ from rest_framework.exceptions import NotFound
 
 
 @api_view(['GET'])
-def measures_between(request, function, name, from_timestamp, to_timestamp, interval):
-    functions = {'max': np.max,'min': np.min,'avg': np.average, 'std': np.std}
+def measures_between(
+        request, function, name, from_timestamp, to_timestamp, interval):
+    functions = {
+        'max': np.max, 'min': np.min, 'avg': np.average, 'std': np.std
+    }
     f = functions.get(function)
     if not f:
         raise NotFound()

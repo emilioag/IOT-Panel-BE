@@ -72,11 +72,16 @@ class Measure(models.Model):
         return cls.objects.filter(**query).values()
 
     @classmethod
-    def agg(cls, gte=None, lte=None, name=None, interval='year', function=np.average):
+    def agg(cls,
+            gte=None,
+            lte=None, name=None, interval='year', function=np.average):
         if gte and lte:
             _l = list(cls.between(gte=gte, lte=lte, name=name))
         else:
             _l = list(cls.objects.all().values())
+
+        if len(_l) <= 0:
+            return {}
 
         def f(x):
             return x.values.tolist() if len(x.values.tolist()) > 0 else False
