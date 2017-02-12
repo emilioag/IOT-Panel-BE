@@ -22,5 +22,8 @@ def measures_between(
         'interval': interval,
         'function': f
     }
-    return Response(
-        OrderedDict(sorted(Measure.agg(**kwargs).items(), key=lambda t: t[0])))
+    d = OrderedDict(sorted(Measure.agg(**kwargs).items(), key=lambda t: t[0]))
+    return Response({
+        'x': d.keys(),
+        'y': d.values()
+    })
