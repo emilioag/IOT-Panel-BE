@@ -19,7 +19,7 @@ from iotbe.views import measures_between
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/mesures/(?P<name>\w{0,300})/from/(?P<from_timestamp>[0-9]+)/to/(?P<to_timestamp>[0-9]+)/by/(?P<interval>\w{0,300})', measures_between),
+    url(r'^api/mesures/(?P<function>\w{0,300})/(?P<name>\w{0,300})/from/(?P<from_timestamp>[0-9]+)/to/(?P<to_timestamp>[0-9]+)/by/(?P<interval>\w{0,300})', measures_between),
     url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework'))

@@ -72,7 +72,7 @@ class Measure(models.Model):
         return cls.objects.filter(**query).values()
 
     @classmethod
-    def agg(cls, gte=None, lte=None, name=None, interval='year'):
+    def agg(cls, gte=None, lte=None, name=None, interval='year', function=np.average):
         if gte and lte:
             _l = list(cls.between(gte=gte, lte=lte, name=name))
         else:
@@ -86,7 +86,7 @@ class Measure(models.Model):
 
         def b(ids):
             _list = list(df[df['id'].isin(ids)]['value'].to_dict().values())
-            return np.average(_list)
+            return function(_list)
 
         options = {
             'minute': ('T', 'DD-MM-YYYY HH:mm'),
